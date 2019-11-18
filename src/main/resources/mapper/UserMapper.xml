@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nwu.quantum.dao.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.nwu.quantum.entity.User" >
+        <id column="email" property="email" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="regist_time" property="registTime" jdbcType="TIMESTAMP" />
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="role" property="role" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        email, status, password, regist_time, img_url, role
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from qc_user
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from qc_user
+        where email = #{email,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.qc.liu.entity.user.User" >
+        insert into qc_user (email, status, password,
+                             regist_time, img_url, role
+        )
+        values (#{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR},
+                #{registTime,jdbcType=TIMESTAMP}, #{imgUrl,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}
+               )
+    </insert>
+    <insert id="insertSelective" parameterType="com.nwu.quantum.entity.User" >
+        insert into qc_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="registTime != null" >
+                regist_time,
+            </if>
+            <if test="imgUrl != null" >
+                img_url,
+            </if>
+            <if test="role != null" >
+                role,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="registTime != null" >
+                #{registTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="imgUrl != null" >
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null" >
+                #{role,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.nwu.quantum.entity.User" >
+        update qc_user
+        <set >
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="registTime != null" >
+                regist_time = #{registTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="imgUrl != null" >
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null" >
+                role = #{role,jdbcType=INTEGER},
+            </if>
+        </set>
+        where email = #{email,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.nwu.quantum.entity.User" >
+        update qc_user
+        set status = #{status,jdbcType=INTEGER},
+            password = #{password,jdbcType=VARCHAR},
+            regist_time = #{registTime,jdbcType=TIMESTAMP},
+            img_url = #{imgUrl,jdbcType=VARCHAR},
+            role = #{role,jdbcType=INTEGER}
+        where email = #{email,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByEmailAndPwd" resultType="com.nwu.quantum.entity.User" parameterType="com.nwu.quantum.entity.User" >
+        SELECT
+        s.email AS email,
+        s.img_url AS imgUrl,
+        s.regist_time AS registTime,
+        s.status AS status,
+        s.role AS role,
+        s.password AS password
+        FROM qc_user s
+        WHERE 1=1
+        <if test="email != null and email != ''">
+            and s.email = #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null and password != ''">
+            and s.password = #{password,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>
