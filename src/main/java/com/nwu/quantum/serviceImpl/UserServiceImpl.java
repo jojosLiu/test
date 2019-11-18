@@ -4,10 +4,7 @@ import com.nwu.quantum.dao.UserMapper;
 import com.nwu.quantum.entity.User;
 import com.nwu.quantum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
-
 import java.util.Date;
 
 @Service

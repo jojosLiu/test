@@ -22,7 +22,7 @@
         delete from qc_user
         where email = #{email,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.qc.liu.entity.user.User" >
+    <insert id="insert" parameterType="com.nwu.quantum.entity.User" >
         insert into qc_user (email, status, password,
                              regist_time, img_url, role
         )
