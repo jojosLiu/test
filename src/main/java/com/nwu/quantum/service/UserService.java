@@ -1,7 +1,6 @@
 package com.nwu.quantum.service;
 
 import com.nwu.quantum.entity.User;
-import org.springframework.stereotype.Service;
 
 
 public interface UserService {
