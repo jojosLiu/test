@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
         if (email ==null || password == null){
             //TODO异常处理后续完成
             System.out.println("邮箱或密码为空！");
-
         }
         User user = new User();
         user.setEmail(email);
@@ -34,7 +33,6 @@ public class UserServiceImpl implements UserService {
             System.out.println("邮箱或密码错误！");
         }
         return userInfo;
-
     }
 
     /**
