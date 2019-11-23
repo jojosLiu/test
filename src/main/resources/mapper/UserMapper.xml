@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace=DAO接口文件路径、id=接口方法名-->
 <mapper namespace="com.nwu.quantum.dao.UserMapper" >
     <resultMap id="BaseResultMap" type="com.nwu.quantum.entity.User" >
         <id column="email" property="email" jdbcType="VARCHAR" />
@@ -12,6 +13,7 @@
     <sql id="Base_Column_List" >
         email, status, password, regist_time, img_url, role
     </sql>
+    <!--id：名称； parameterType传入参数类型； resultType：返回数据类型-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select
         <include refid="Base_Column_List" />
@@ -104,7 +106,9 @@
         where email = #{email,jdbcType=VARCHAR}
     </update>
 
-    <select id="selectByEmailAndPwd" resultType="com.nwu.quantum.entity.User" parameterType="com.nwu.quantum.entity.User" >
+    <select id="selectByEmailAndPwd"
+            resultType="com.nwu.quantum.entity.User"
+            parameterType="com.nwu.quantum.entity.User" >
         SELECT
         s.email AS email,
 --         s.img_url AS imgUrl,

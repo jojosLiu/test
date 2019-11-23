@@ -21,15 +21,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email,String password){
         if (email ==null || password == null){
-            //TODO异常处理后续完成
             System.out.println("邮箱或密码为空！");
         }
-        User user = new User();
+        User user = new User();                 //实例化user，传入邮箱和密码值
         user.setEmail(email);
-        user.setPassword(password);              //实例化user，传入邮箱和密码值
-        User userInfo = userMapper.selectByEmailAndPwd(user);
+        user.setPassword(password);
+        User userInfo = userMapper.selectByEmailAndPwd(user);     // 执行sql
         if (userInfo == null){
-            //TODO异常处理后续完成
             System.out.println("邮箱或密码错误！");
         }
         return userInfo;
